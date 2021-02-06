@@ -1,0 +1,56 @@
+{
+    "name": "tipoff/forms",
+    "description": "Laravel Package for opinionated forms style",
+    "keywords": [
+        "tipoff",
+        "forms"
+    ],
+    "homepage": "https://github.com/tipoff/forms",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Tipoff",
+            "email": "packages@tipoff.com",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": "^7.4|^8.0",
+        "tipoff/support": "^1.0"
+    },
+    "require-dev": {
+        "orchestra/testbench": "^6.0",
+        "phpunit/phpunit": "^9.3"
+    },
+    "autoload": {
+        "psr-4": {
+            "Tipoff\\Forms\\": "src",
+            "Tipoff\\Forms\\Database\\Factories\\": "database/factories"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tipoff\\Forms\\Tests\\": "tests"
+        }
+    },
+    "scripts": {
+        "psalm": "vendor/bin/psalm",
+        "test": "vendor/bin/phpunit --colors=always",
+        "test-coverage": "vendor/bin/phpunit --coverage-html coverage"
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Tipoff\\Forms\\FormsServiceProvider"
+            ],
+            "aliases": {
+                "Forms": "Tipoff\\Forms\\FormsFacade"
+            }
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}

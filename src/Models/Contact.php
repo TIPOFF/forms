@@ -14,7 +14,7 @@ class Contact extends BaseModel
     protected $guarded = ['id'];
 
     protected $casts = [
-        'emailed_at'     => 'datetime',
+        'emailed_at' => 'datetime',
         'requested_date' => 'date',
     ];
 

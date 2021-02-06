@@ -14,7 +14,7 @@ class Contact extends BaseModel
     protected $guarded = ['id'];
 
     protected $casts = [
-        'emailed_at' => 'datetime',
+        'emailed_at'     => 'datetime',
         'requested_date' => 'date',
     ];
 
@@ -47,18 +47,27 @@ class Contact extends BaseModel
         $this->reference_number = $token;
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(config('tipoff.model_class.user'));
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function location()
     {
-        return $this->belongsTo(Location::class);
+        return $this->belongsTo(config('tipoff.model_class.location'));
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\MorphMany
+     */
     public function notes()
     {
-        return $this->morphMany(Note::class, 'noteable');
+        return $this->morphMany(config('tipoff.model_class.note'), 'noteable');
     }
 }

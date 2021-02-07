@@ -1,14 +1,14 @@
 <?php namespace Tipoff\Forms\Models;
 
 use Carbon\Carbon;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Str;
 use Tipoff\Support\Models\BaseModel;
+use Tipoff\Support\Traits\HasPackageFactory;
 
 class Contact extends BaseModel
 {
-    use HasFactory;
+    use HasPackageFactory;
     use SoftDeletes;
 
     protected $guarded = ['id'];

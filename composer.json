@@ -23,12 +23,6 @@
         "phpunit/phpunit": "^9.3",
         "vimeo/psalm": "^4.4"
     },
-    "repositories": [
-        {
-            "type": "composer",
-            "url": "https://nova.laravel.com"
-        }
-    ],
     "autoload": {
         "psr-4": {
             "Tipoff\\Forms\\": "src",
@@ -58,6 +52,12 @@
             }
         }
     },
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://nova.laravel.com"
+        }
+    ],
     "minimum-stability": "dev",
     "prefer-stable": true
 }

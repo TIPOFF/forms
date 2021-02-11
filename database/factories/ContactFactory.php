@@ -21,8 +21,8 @@ class ContactFactory extends Factory
     {
         return [
             'form_type'      => $this->faker->randomElement(['contact', 'reservation', 'parties', 'groups', 'employment']),
-            'user_id'        => randomOrCreate(config('tipoff.model_class.user')),
-            'location_id'    => randomOrCreate(config('tipoff.model_class.location')),
+            'user_id'        => randomOrCreate(app('user')),
+            'location_id'    => randomOrCreate(app('location')),
             'phone'          => '555-555-5555',
             'participants'   => $this->faker->numberBetween(10, 200),
             'requested_date' => $this->faker->dateTimeBetween($startDate = 'now', $endDate = '+6 months')->format('Y-m-d'),

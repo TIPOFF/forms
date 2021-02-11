@@ -52,7 +52,7 @@ class Contact extends BaseModel
      */
     public function user()
     {
-        return $this->belongsTo(config('tipoff.model_class.user'));
+        return $this->belongsTo(app('user'));
     }
 
     /**
@@ -60,7 +60,7 @@ class Contact extends BaseModel
      */
     public function location()
     {
-        return $this->belongsTo(config('tipoff.model_class.location'));
+        return $this->belongsTo(app('location'));
     }
 
     /**
@@ -68,6 +68,6 @@ class Contact extends BaseModel
      */
     public function notes()
     {
-        return $this->morphMany(config('tipoff.model_class.note'), 'noteable');
+        return $this->morphMany(app('note'), 'noteable');
     }
 }

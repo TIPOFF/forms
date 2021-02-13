@@ -45,10 +45,7 @@
         "laravel": {
             "providers": [
                 "Tipoff\\Forms\\FormsServiceProvider"
-            ],
-            "aliases": {
-                "Forms": "Tipoff\\Forms\\FormsFacade"
-            }
+            ]
         }
     },
     "repositories": [

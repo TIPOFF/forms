@@ -2,28 +2,20 @@
 
 namespace Tipoff\Forms;
 
-use Spatie\LaravelPackageTools\Package;
-use Spatie\LaravelPackageTools\PackageServiceProvider;
+use Tipoff\Forms\Models\Contact;
+use Tipoff\Forms\Policies\ContactPolicy;
+use Tipoff\Support\TipoffPackage;
+use Tipoff\Support\TipoffServiceProvider;
 
-class FormsServiceProvider extends PackageServiceProvider
+class FormsServiceProvider extends TipoffServiceProvider
 {
-    public function boot()
+    public function configureTipoffPackage(TipoffPackage $package): void
     {
-        $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
-
-        parent::boot();
-    }
-
-    public function configurePackage(Package $package): void
-    {
-        /*
-         * This class is a Package Service Provider
-         *
-         * More info: https://github.com/spatie/laravel-package-tools
-         */
         $package
+            ->hasPolicies([
+                Contact::class => ContactPolicy::class,
+            ])
             ->name('forms')
-            ->hasConfigFile()
-            ->hasViews();
+            ->hasConfigFile();
     }
 }

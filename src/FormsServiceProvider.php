@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Tipoff\Forms;
 
-use Tipoff\Forms\Models\Contact;
 use Tipoff\Forms\Policies\FormPolicy;
 use Tipoff\Support\TipoffPackage;
 use Tipoff\Support\TipoffServiceProvider;

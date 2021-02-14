@@ -1,4 +1,8 @@
-<?php namespace Tipoff\Forms\Models;
+<?php 
+
+declare(strict_types=1);
+
+namespace Tipoff\Forms\Models;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\SoftDeletes;

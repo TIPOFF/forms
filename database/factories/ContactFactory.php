@@ -1,4 +1,8 @@
-<?php namespace Tipoff\Forms\Database\Factories;
+<?php 
+
+declare(strict_types=1);
+
+namespace Tipoff\Forms\Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Tipoff\Forms\Models\Contact;

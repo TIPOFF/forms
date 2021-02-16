@@ -51,11 +51,11 @@ class Contact extends BaseResource
     {
         return array_filter([
             Select::make('Form Type')->options([
-                'contact'     => 'Contact Page',
+                'contact' => 'Contact Page',
                 'reservation' => 'Reservation Page',
-                'parties'     => 'Private Parties Page',
-                'groups'      => 'Team Building Page',
-                'employment'  => 'Employment Page',
+                'parties' => 'Private Parties Page',
+                'groups' => 'Team Building Page',
+                'employment' => 'Employment Page',
             ])->required()->hideWhenUpdating(),
             nova('location') ? BelongsTo::make('Location', 'location', nova('location'))->required()->hideWhenUpdating() : null,
             nova('user') ? BelongsTo::make('User', 'user', nova('user'))->required()->hideWhenUpdating() : null,

@@ -17,6 +17,9 @@ class FormsServiceProvider extends TipoffServiceProvider
             ->hasPolicies([
                 Contact::class => ContactPolicy::class,
             ])
+            ->hasNovaResources([
+                \Tipoff\Forms\Nova\Contact::class,
+            ])
             ->name('forms')
             ->hasConfigFile();
     }

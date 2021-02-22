@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tipoff\Forms\Nova;
 
 use Dniccum\PhoneNumber\PhoneNumber;

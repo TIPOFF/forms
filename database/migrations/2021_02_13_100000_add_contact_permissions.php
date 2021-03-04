@@ -2,24 +2,18 @@
 
 declare(strict_types=1);
 
-use Illuminate\Database\Migrations\Migration;
-use Spatie\Permission\Contracts\Permission;
-use Spatie\Permission\PermissionRegistrar;
+use Tipoff\Authorization\Permissions\BasePermissionsMigration;
 
-class AddContactPermissions extends Migration
+class AddContactPermissions extends BasePermissionsMigration
 {
     public function up()
     {
-        if (app()->has(Permission::class)) {
-            app(PermissionRegistrar::class)->forgetCachedPermissions();
+        $permissions = [
+             'view contacts',
+             'create contacts',
+             'update contacts'
+        ];
 
-            foreach ([
-                         'view contacts',
-                         'create contacts',
-                         'update contacts'
-                     ] as $name) {
-                app(Permission::class)::findOrCreate($name, null);
-            };
-        }
+        $this->createPermissions($permissions);
     }
 }

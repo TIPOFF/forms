@@ -9,8 +9,7 @@ class AddContactPermissions extends BasePermissionsMigration
     public function up()
     {
         $permissions = [
-            'view contacts' => ['Owner', 'Staff'],
-            'delete contacts' => [],   // Admin only
+            'view contacts' => ['Owner', 'Staff']
         ];
 
         $this->createPermissions($permissions);

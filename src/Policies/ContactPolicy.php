@@ -24,17 +24,17 @@ class ContactPolicy
 
     public function create(UserInterface $user): bool
     {
-        return false;
+        return $user->hasPermissionTo('create contacts') ? true : false;
     }
 
     public function update(UserInterface $user, Contact $contact): bool
     {
-        return false;
+        return $user->hasPermissionTo('update contacts') ? true : false;
     }
 
     public function delete(UserInterface $user, Contact $contact): bool
     {
-        return false;
+        return $user->hasPermissionTo('delete contacts') ? true : false;
     }
 
     public function restore(UserInterface $user, Contact $contact): bool

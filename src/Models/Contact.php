@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Tipoff\Forms\Models;
 
+use Assert\Assert;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Str;
@@ -25,12 +26,10 @@ class Contact extends BaseModel
         parent::boot();
 
         static::creating(function ($contact) {
-            if (empty($contact->user_id)) {
-                throw new \Exception('A contact must be made by a user.');
-            }
-            if (empty($contact->location_id)) {
-                throw new \Exception('A contact must be made to a location.');
-            }
+            Assert::lazy()
+                ->that($contact->user_id)->notEmpty('A contact must be made by a user.')
+                ->that($contact->location_id)->notEmpty('A contact must be made to a location.')
+                ->verifyNow();
             $contact->generateReferenceNumber();
         });
     }

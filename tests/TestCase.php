@@ -6,9 +6,11 @@ namespace Tipoff\Forms\Tests;
 
 use Laravel\Nova\NovaCoreServiceProvider;
 use Spatie\Permission\PermissionServiceProvider;
+use Tipoff\Addresses\AddressesServiceProvider;
 use Tipoff\Authorization\AuthorizationServiceProvider;
 use Tipoff\Forms\FormsServiceProvider;
 use Tipoff\Forms\Tests\Support\Providers\NovaPackageServiceProvider;
+use Tipoff\Locations\LocationsServiceProvider;
 use Tipoff\Support\SupportServiceProvider;
 use Tipoff\TestSupport\BaseTestCase;
 
@@ -18,8 +20,10 @@ class TestCase extends BaseTestCase
     {
         return [
             SupportServiceProvider::class,
+            AddressesServiceProvider::class,
             AuthorizationServiceProvider::class,
             PermissionServiceProvider::class,
+            LocationsServiceProvider::class,
             FormsServiceProvider::class,
             NovaCoreServiceProvider::class,
             NovaPackageServiceProvider::class,

@@ -27,7 +27,6 @@ class Contact extends BaseModel
 
         static::creating(function ($contact) {
             Assert::lazy()
-                ->that($contact->user_id)->notEmpty('A contact must be made by a user.')
                 ->that($contact->location_id)->notEmpty('A contact must be made to a location.')
                 ->verifyNow();
             $contact->generateReferenceNumber();

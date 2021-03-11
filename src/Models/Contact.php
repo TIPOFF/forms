@@ -47,25 +47,16 @@ class Contact extends BaseModel
         $this->reference_number = $token;
     }
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
     public function user()
     {
         return $this->belongsTo(app('user'));
     }
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
     public function location()
     {
         return $this->belongsTo(app('location'));
     }
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\MorphMany
-     */
     public function notes()
     {
         return $this->morphMany(app('note'), 'noteable');

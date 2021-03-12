@@ -16,7 +16,7 @@ class FormsServiceProvider extends TipoffServiceProvider
     {
         $package
             ->hasCommands([
-                AttachContactUsers::class
+                AttachContactUsers::class,
             ])
             ->hasPolicies([
                 Contact::class => ContactPolicy::class,

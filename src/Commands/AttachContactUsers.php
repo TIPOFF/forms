@@ -42,7 +42,7 @@ class AttachContactUsers extends Command
     public function handle()
     {
         $contacts = Contact::whereNull('user_id')->get();
-        foreach($contacts as $contact) {
+        foreach ($contacts as $contact) {
             $user = User::where('email', '=', $contact->email)->first();
             if ($user) {
                 $contact->user_id = $user->id;

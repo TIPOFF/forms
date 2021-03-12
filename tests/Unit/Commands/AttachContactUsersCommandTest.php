@@ -25,7 +25,7 @@ class AttachContactUsersCommandTest extends TestCase
         //Create a user and contact with same email, but not attached
         $user = randomOrCreate(app('user'));
         Contact::factory()->create([
-            'email' => $user->email
+            'email' => $user->email,
         ]);
 
         $this->artisan('attach:users');

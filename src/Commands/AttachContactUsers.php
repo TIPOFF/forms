@@ -6,7 +6,6 @@ namespace Tipoff\Forms\Commands;
 
 use Illuminate\Console\Command;
 use Tipoff\Forms\Models\Contact;
-use Tipoff\TestSupport\Models\User;
 
 class AttachContactUsers extends Command
 {
@@ -43,7 +42,7 @@ class AttachContactUsers extends Command
     {
         $contacts = Contact::whereNull('user_id')->get();
         foreach ($contacts as $contact) {
-            $user = User::where('email', '=', $contact->email)->first();
+            $user = app('user')->where('email', '=', $contact->email)->first();
             if ($user) {
                 $contact->user_id = $user->id;
                 $contact->save();

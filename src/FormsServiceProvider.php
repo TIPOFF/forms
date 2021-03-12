@@ -15,14 +15,14 @@ class FormsServiceProvider extends TipoffServiceProvider
     public function configureTipoffPackage(TipoffPackage $package): void
     {
         $package
-            ->hasCommands([
-                AttachContactUsers::class,
-            ])
             ->hasPolicies([
                 Contact::class => ContactPolicy::class,
             ])
             ->hasNovaResources([
                 \Tipoff\Forms\Nova\Contact::class,
+            ])
+            ->hasCommands([
+                AttachContactUsers::class,
             ])
             ->name('forms')
             ->hasConfigFile();

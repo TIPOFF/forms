@@ -43,7 +43,7 @@ class Contact extends BaseResource
     {
         return array_filter([
             ID::make(),
-            Enum::make('ContactStatus', function(\Tipoff\Forms\Models\Contact $contact) {
+            Enum::make('ContactStatus', function (\Tipoff\Forms\Models\Contact $contact) {
                 return $contact->getContactStatus();
             })->attach(ContactStatus::class)->sortable(),
             Text::make('Form Type')->sortable(),
@@ -57,7 +57,7 @@ class Contact extends BaseResource
     public function fields(Request $request)
     {
         return array_filter([
-            Enum::make('ContactStatus', function(\Tipoff\Forms\Models\Contact $contact) {
+            Enum::make('ContactStatus', function (\Tipoff\Forms\Models\Contact $contact) {
                 return $contact->getContactStatus();
             })->attach(ContactStatus::class),
             Select::make('Form Type')->options([

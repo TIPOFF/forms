@@ -6,11 +6,11 @@ namespace Tipoff\Forms\Tests\Unit\Models;
 
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Foundation\Testing\WithFaker;
+use Tipoff\Authorization\Models\User;
 use Tipoff\Forms\Enums\ContactStatus;
 use Tipoff\Forms\Models\Contact;
 use Tipoff\Forms\Tests\TestCase;
 use Tipoff\Statuses\Models\StatusRecord;
-use Tipoff\Authorization\Models\User;
 
 class ContactModelTest extends TestCase
 {

@@ -17,7 +17,9 @@ use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Textarea;
 use Laravel\Nova\Http\Requests\NovaRequest;
 use Laravel\Nova\Panel;
+use Tipoff\Forms\Enums\ContactStatus;
 use Tipoff\Support\Nova\BaseResource;
+use Tipoff\Support\Nova\Fields\Enum;
 
 class Contact extends BaseResource
 {
@@ -41,6 +43,9 @@ class Contact extends BaseResource
     {
         return array_filter([
             ID::make(),
+            Enum::make('ContactStatus', function(\Tipoff\Forms\Models\Contact $contact) {
+                return $contact->getContactStatus();
+            })->attach(ContactStatus::class)->sortable(),
             Text::make('Form Type')->sortable(),
             Text::make('Number', 'reference_number')->sortable(),
             nova('user') ? BelongsTo::make('User', 'user', nova('user'))->sortable() : null,
@@ -52,6 +57,9 @@ class Contact extends BaseResource
     public function fields(Request $request)
     {
         return array_filter([
+            Enum::make('ContactStatus', function(\Tipoff\Forms\Models\Contact $contact) {
+                return $contact->getContactStatus();
+            })->attach(ContactStatus::class),
             Select::make('Form Type')->options([
                 'contact' => 'Contact Page',
                 'reservation' => 'Reservation Page',

@@ -8,10 +8,12 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Tipoff\Support\Models\BaseModel;
 use Tipoff\Support\Traits\HasPackageFactory;
 
-class ContactFollowup extends BaseModel
+class ContactResponse extends BaseModel
 {
     use HasPackageFactory;
     use SoftDeletes;
+
+    public $timestamps = false;
 
     public function contact()
     {

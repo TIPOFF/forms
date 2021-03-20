@@ -13,6 +13,10 @@ class AddContactPermissions extends BasePermissionsMigration
             'create contacts' => ['Owner', 'Executive', 'Staff'],
             'update contacts' => ['Owner', 'Executive', 'Staff'],
             'delete contacts' => ['Owner', 'Executive', 'Staff'],
+            'view contact responses' => ['Owner', 'Executive', 'Staff'],
+            'create contact responses' => ['Owner', 'Executive', 'Staff'],
+            'update contact responses' => ['Owner', 'Executive', 'Staff'],
+            'delete contact responses' => ['Owner', 'Executive', 'Staff'],
         ];
 
         $this->createPermissions($permissions);

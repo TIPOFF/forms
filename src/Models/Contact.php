@@ -77,9 +77,9 @@ class Contact extends BaseModel
         return $this->getStatusHistory(ContactStatus::statusType());
     }
 
-    public function followup()
+    public function response()
     {
-        return $this->hasOne(ContactFollowup::class);
+        return $this->hasOne(ContactResponse::class);
     }
 
     public function user()

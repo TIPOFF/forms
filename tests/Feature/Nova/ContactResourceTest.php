@@ -13,7 +13,7 @@ class ContactResourceTest extends TestCase
 {
     use DatabaseTransactions;
 
-    private const NOVA_ROUTE = 'nova-api/forms';
+    private const NOVA_ROUTE = 'nova-api/contacts';
 
     /**
      * @dataProvider dataProviderForIndexByRole

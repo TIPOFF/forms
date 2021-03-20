@@ -17,7 +17,6 @@ class ContactResponseFactory extends Factory
         return [
             'contact_id' => Contact::factory()->create()->id,
             'emailed_at' => $this->faker->dateTime,
-            'closed_at'  => $this->faker->dateTime,
         ];
     }
 }

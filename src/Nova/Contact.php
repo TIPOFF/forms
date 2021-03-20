@@ -83,9 +83,9 @@ class Contact extends BaseResource
     {
         return [
             Text::make('Number', 'reference_number')->exceptOnForms(),
-            Number::make('Participants')->nullable()->hideWhenUpdating(),
-            Date::make('Requested Date')->nullable()->hideWhenUpdating(),
-            Text::make('Requested Time')->nullable()->hideWhenUpdating(),
+            Number::make('Participants', 'fields->participants')->nullable()->hideWhenUpdating(),
+            Date::make('Requested Date', 'fields->requested_date')->nullable()->hideWhenUpdating(),
+            Text::make('Requested Time', 'fields->requested_time')->nullable()->hideWhenUpdating(),
             Text::make('Company Name')->nullable()->hideWhenUpdating(),
         ];
     }

@@ -24,6 +24,7 @@ class Contact extends BaseModel
     protected $casts = [
         'emailed_at' => 'datetime',
         'requested_date' => 'date',
+        'fields' => 'array',
     ];
 
     protected static function boot()
@@ -74,6 +75,11 @@ class Contact extends BaseModel
     public function getContactStatusHistory(): Collection
     {
         return $this->getStatusHistory(ContactStatus::statusType());
+    }
+
+    public function followup()
+    {
+        return $this->hasOne(ContactFollowup::class);
     }
 
     public function user()

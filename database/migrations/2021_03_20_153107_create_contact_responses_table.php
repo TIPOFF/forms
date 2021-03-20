@@ -16,6 +16,7 @@ class CreateContactResponsesTable extends Migration
             $table->foreignIdFor(Contact::class);
             $table->dateTime('emailed_at')->nullable();
             $table->dateTime('closed_at')->nullable();
+            $table->timestamp('created_at');
         });
     }
 }

@@ -13,7 +13,7 @@ class ContactResponse extends BaseModel
     use HasPackageFactory;
     use SoftDeletes;
 
-    public $timestamps = false;
+    const UPDATED_AT = null;
 
     public function contact()
     {

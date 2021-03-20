@@ -18,6 +18,7 @@ use Laravel\Nova\Fields\Textarea;
 use Laravel\Nova\Http\Requests\NovaRequest;
 use Laravel\Nova\Panel;
 use Tipoff\Forms\Enums\ContactStatus;
+use Tipoff\Forms\Enums\FormType;
 use Tipoff\Support\Nova\BaseResource;
 use Tipoff\Support\Nova\Fields\Enum;
 
@@ -61,11 +62,11 @@ class Contact extends BaseResource
                 return $contact->getContactStatus();
             })->attach(ContactStatus::class),
             Select::make('Form Type')->options([
-                'contact' => 'Contact Page',
-                'reservation' => 'Reservation Page',
-                'parties' => 'Private Parties Page',
-                'groups' => 'Team Building Page',
-                'employment' => 'Employment Page',
+                FormType::CONTACT => 'Contact',
+                FormType::RESERVATIONS => 'Reservations',
+                FormType::PARTIES => 'Parties',
+                FormType::GROUPS => 'Groups',
+                FormType::EMPLOYMENT => 'Employment',
             ])->required()->hideWhenUpdating(),
             nova('location') ? BelongsTo::make('Location', 'location', nova('location'))->required()->hideWhenUpdating() : null,
             nova('user') ? BelongsTo::make('User', 'user', nova('user'))->required()->hideWhenUpdating() : null,

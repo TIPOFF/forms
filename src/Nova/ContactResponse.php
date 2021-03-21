@@ -7,6 +7,7 @@ namespace Tipoff\Forms\Nova;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\ID;
+use Laravel\Nova\Fields\Textarea;
 use Laravel\Nova\Http\Requests\NovaRequest;
 use Laravel\Nova\Panel;
 use Tipoff\Support\Nova\BaseResource;
@@ -32,6 +33,8 @@ class ContactResponse extends BaseResource
     {
         return array_filter([
             new Panel('Data Fields', $this->dataFields()),
+            Textarea::make('Message')->rows(3)->alwaysShow()->nullable()->hideWhenUpdating(),
+            Textarea::make('Comment')->rows(3)->alwaysShow()->nullable()->hideWhenUpdating(),
         ]);
     }
 
@@ -40,7 +43,6 @@ class ContactResponse extends BaseResource
         return [
             ID::make(),
             DateTime::make('Emailed At', 'emailed_at')->exceptOnForms(),
-            DateTime::make('Closed At', 'closed_at')->exceptOnForms(),
         ];
     }
 }

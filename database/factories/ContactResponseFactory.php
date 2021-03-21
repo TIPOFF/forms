@@ -17,6 +17,7 @@ class ContactResponseFactory extends Factory
         return [
             'contact_id' => Contact::factory()->create()->id,
             'emailed_at' => $this->faker->dateTime,
+            'creator_id' => randomOrCreate(app('user')),
         ];
     }
 }

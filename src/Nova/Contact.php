@@ -6,7 +6,6 @@ namespace Tipoff\Forms\Nova;
 
 use Dniccum\PhoneNumber\PhoneNumber;
 use Illuminate\Http\Request;
-use Inspheric\Fields\Email;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\Date;
 use Laravel\Nova\Fields\DateTime;

@@ -104,7 +104,7 @@ class ContactResourceTest extends TestCase
             ->assertStatus($hasAccess ? 200 : 403);
 
         // But deletion will only occur if user has permissions
-        $this->assertDatabaseCount('discounts', $canDelete ? 0 : 1);
+        $this->assertDatabaseCount('contacts', $canDelete ? 0 : 1);
     }
 
     public function dataProviderForDeleteByRole()

@@ -16,9 +16,9 @@ class ContactResponse extends BaseModel
     const UPDATED_AT = null;
 
     protected $casts = [
-	    'fields' => 'array',
-	    'emailed_at' => 'datetime',
-	];
+        'fields' => 'array',
+        'emailed_at' => 'datetime',
+    ];
 
     public function contact()
     {

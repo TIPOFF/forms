@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Tipoff\Forms;
 
-use Tipoff\Forms\Commands\AttachContactUsers;
 use Tipoff\Forms\Models\Contact;
 use Tipoff\Forms\Models\ContactResponse;
 use Tipoff\Forms\Policies\ContactPolicy;

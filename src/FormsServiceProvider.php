@@ -25,9 +25,6 @@ class FormsServiceProvider extends TipoffServiceProvider
                 \Tipoff\Forms\Nova\Contact::class,
                 \Tipoff\Forms\Nova\ContactResponse::class,
             ])
-            ->hasCommands([
-                AttachContactUsers::class,
-            ])
             ->name('forms')
             ->hasConfigFile();
     }

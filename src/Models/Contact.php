@@ -77,6 +77,11 @@ class Contact extends BaseModel
         return $this->getStatusHistory(ContactStatus::statusType());
     }
 
+    public function email()
+    {
+        return $this->hasOne(app('email_address'));
+    }
+
     public function response()
     {
         return $this->hasOne(ContactResponse::class);

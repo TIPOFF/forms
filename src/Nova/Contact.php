@@ -6,7 +6,6 @@ namespace Tipoff\Forms\Nova;
 
 use Dniccum\PhoneNumber\PhoneNumber;
 use Illuminate\Http\Request;
-use Inspheric\Fields\Email;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\Date;
 use Laravel\Nova\Fields\DateTime;
@@ -71,7 +70,7 @@ class Contact extends BaseResource
             nova('location') ? BelongsTo::make('Location', 'location', nova('location'))->required()->hideWhenUpdating() : null,
             nova('user') ? BelongsTo::make('User', 'user', nova('user'))->required()->hideWhenUpdating() : null,
             PhoneNumber::make('Phone')->format('###-###-####')->disableValidation()->useMaskPlaceholder()->linkOnDetail()->hideWhenUpdating(),
-            Email::make('Email', 'user.email')->clickable()->hideWhenUpdating(),
+            nova('email_address') ? BelongsTo::make('Email Address', 'email_address', nova('email_address'))->sortable() : null,
             Textarea::make('Message')->rows(3)->alwaysShow()->nullable()->hideWhenUpdating(),
 
             new Panel('Submission Details', $this->submissionFields()),

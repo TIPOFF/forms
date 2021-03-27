@@ -18,5 +18,6 @@ function toControllerSlug(String $slug)
     foreach ($words as $word) {
         $name .= ucfirst($word);
     }
+
     return $name . 'Controller';
 }

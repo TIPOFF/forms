@@ -71,7 +71,7 @@ class Contact extends BaseResource
             Text::make('First Name', 'first_name')->hideWhenUpdating(),
             Text::make('Last Name', 'last_name')->hideWhenUpdating(),
             nova('user') ? BelongsTo::make('User', 'user', nova('user'))->required()->hideWhenUpdating() : null,
-            nova('email_address') ? BelongsTo::make('Email Address', 'email_address', nova('email_address'))->sortable() : null,
+            nova('email_address') ? BelongsTo::make('Email Address', 'email', nova('email_address'))->sortable() : null,
             nova('phone') ? BelongsTo::make('Phone', 'phone', nova('phone'))->sortable() : null,
             Text::make('Company Name')->nullable()->hideWhenUpdating(),
 

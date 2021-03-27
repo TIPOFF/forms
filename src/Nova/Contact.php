@@ -42,13 +42,13 @@ class Contact extends BaseResource
     {
         return array_filter([
             ID::make(),
+            nova('location') ? BelongsTo::make('Location', 'location', nova('location'))->sortable() : null,
+            Text::make('Form Type')->sortable(),
+            Text::make('Number', 'reference_number')->sortable(),
             Enum::make('ContactStatus', function (\Tipoff\Forms\Models\Contact $contact) {
                 return $contact->getContactStatus();
             })->attach(ContactStatus::class)->sortable(),
-            Text::make('Form Type')->sortable(),
-            Text::make('Number', 'reference_number')->sortable(),
             nova('user') ? BelongsTo::make('User', 'user', nova('user'))->sortable() : null,
-            nova('location') ? BelongsTo::make('Location', 'location', nova('location'))->sortable() : null,
             DateTime::make('Submitted', 'created_at')->sortable(),
         ]);
     }
@@ -57,9 +57,7 @@ class Contact extends BaseResource
     {
         return array_filter([
             Text::make('Number', 'reference_number')->exceptOnForms(),
-            Enum::make('ContactStatus', function (\Tipoff\Forms\Models\Contact $contact) {
-                return $contact->getContactStatus();
-            })->attach(ContactStatus::class),
+            nova('location') ? BelongsTo::make('Location', 'location', nova('location'))->required()->hideWhenUpdating() : null,
             Select::make('Form Type')->options([
                 FormType::CONTACT => 'Contact',
                 FormType::RESERVATIONS => 'Reservations',
@@ -67,12 +65,14 @@ class Contact extends BaseResource
                 FormType::GROUPS => 'Groups',
                 FormType::EMPLOYMENT => 'Employment',
             ])->required()->hideWhenUpdating(),
-            nova('location') ? BelongsTo::make('Location', 'location', nova('location'))->required()->hideWhenUpdating() : null,
+            Enum::make('ContactStatus', function (\Tipoff\Forms\Models\Contact $contact) {
+                return $contact->getContactStatus();
+            })->attach(ContactStatus::class),
             Text::make('First Name', 'first_name')->hideWhenUpdating(),
             Text::make('Last Name', 'last_name')->hideWhenUpdating(),
-            nova('user') ? BelongsTo::make('User', 'user', nova('user'))->required()->hideWhenUpdating() : null,
-            nova('email_address') ? BelongsTo::make('Email Address', 'email', nova('email_address'))->sortable() : null,
-            nova('phone') ? BelongsTo::make('Phone', 'phone', nova('phone'))->sortable() : null,
+            nova('user') ? BelongsTo::make('User', 'user', nova('user'))->nullable()->hideWhenUpdating() : null,
+            nova('email_address') ? BelongsTo::make('Email Address', 'email', nova('email_address'))->required()->hideWhenUpdating() : null,
+            nova('phone') ? BelongsTo::make('Phone', 'phone', nova('phone'))->nullable() : null,
             Text::make('Company Name')->nullable()->hideWhenUpdating(),
 
             new Panel('Submission Details', $this->submissionFields()),
@@ -85,9 +85,9 @@ class Contact extends BaseResource
     {
         return [
             Textarea::make('Message')->rows(3)->alwaysShow()->nullable()->hideWhenUpdating(),
-            Number::make('Participants', 'fields->participants')->nullable()->hideWhenUpdating(),
-            Date::make('Requested Date', 'fields->requested_date')->nullable()->hideWhenUpdating(),
-            Text::make('Requested Time', 'fields->requested_time')->nullable()->hideWhenUpdating(),
+//             Number::make('Participants', 'fields->participants')->nullable()->hideWhenUpdating(),
+//             Date::make('Requested Date', 'fields->requested_date')->nullable()->hideWhenUpdating(),
+//             Text::make('Requested Time', 'fields->requested_time')->nullable()->hideWhenUpdating(),
         ];
     }
 

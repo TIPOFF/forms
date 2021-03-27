@@ -20,8 +20,8 @@ class ContactFactory extends Factory
             'email_address_id'  => randomOrCreate(app('email_address')),
             'first_name'        => $this->faker->firstName,
             'last_name'         => $this->faker->lastName,
-            'phone'             => randomOrCreate(app('phone')),
             'company_name'      => $this->faker->company,
+            'phone_id'          => randomOrCreate(app('phone')),
             'message'           => $this->faker->paragraph,
         ];
     }

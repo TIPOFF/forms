@@ -81,6 +81,11 @@ class Contact extends BaseModel
     {
         return $this->hasOne(app('email_address'));
     }
+    
+    public function phone()
+    {
+        return $this->hasOne(app('phone'));
+    }
 
     public function response()
     {

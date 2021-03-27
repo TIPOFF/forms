@@ -24,6 +24,7 @@ class FormsServiceProvider extends TipoffServiceProvider
                 \Tipoff\Forms\Nova\Contact::class,
                 \Tipoff\Forms\Nova\ContactResponse::class,
             ])
+            ->hasApiRoute('api')
             ->name('forms')
             ->hasConfigFile();
     }

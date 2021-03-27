@@ -56,6 +56,7 @@ class Contact extends BaseResource
     public function fields(Request $request)
     {
         return array_filter([
+            Text::make('Number', 'reference_number')->exceptOnForms(),
             Enum::make('ContactStatus', function (\Tipoff\Forms\Models\Contact $contact) {
                 return $contact->getContactStatus();
             })->attach(ContactStatus::class),
@@ -67,10 +68,12 @@ class Contact extends BaseResource
                 FormType::EMPLOYMENT => 'Employment',
             ])->required()->hideWhenUpdating(),
             nova('location') ? BelongsTo::make('Location', 'location', nova('location'))->required()->hideWhenUpdating() : null,
+            Text::make('First Name', 'first_name')->hideWhenUpdating(),
+            Text::make('Last Name', 'last_name')->hideWhenUpdating(),
             nova('user') ? BelongsTo::make('User', 'user', nova('user'))->required()->hideWhenUpdating() : null,
-            // PhoneNumber::make('Phone')->format('###-###-####')->disableValidation()->useMaskPlaceholder()->linkOnDetail()->hideWhenUpdating(),
             nova('email_address') ? BelongsTo::make('Email Address', 'email_address', nova('email_address'))->sortable() : null,
-            Textarea::make('Message')->rows(3)->alwaysShow()->nullable()->hideWhenUpdating(),
+            nova('phone') ? BelongsTo::make('Phone', 'phone', nova('phone'))->sortable() : null,
+            Text::make('Company Name')->nullable()->hideWhenUpdating(),
 
             new Panel('Submission Details', $this->submissionFields()),
 
@@ -81,20 +84,19 @@ class Contact extends BaseResource
     protected function submissionFields()
     {
         return [
-            Text::make('Number', 'reference_number')->exceptOnForms(),
+            Textarea::make('Message')->rows(3)->alwaysShow()->nullable()->hideWhenUpdating(),
             Number::make('Participants', 'fields->participants')->nullable()->hideWhenUpdating(),
             Date::make('Requested Date', 'fields->requested_date')->nullable()->hideWhenUpdating(),
             Text::make('Requested Time', 'fields->requested_time')->nullable()->hideWhenUpdating(),
-            Text::make('Company Name')->nullable()->hideWhenUpdating(),
         ];
     }
 
     protected function dataFields(): array
     {
-        return [
-            ID::make(),
-            DateTime::make('Created At')->exceptOnForms(),
-            DateTime::make('Updated At')->exceptOnForms(),
-        ];
+        return array_merge(
+            parent::dataFields(),
+            $this->creatorDataFields(),
+            $this->updaterDataFields(),
+        );
     }
 }

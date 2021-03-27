@@ -13,13 +13,17 @@ use Illuminate\Support\Str;
 use Tipoff\Forms\Enums\ContactStatus;
 use Tipoff\Statuses\Traits\HasStatuses;
 use Tipoff\Support\Models\BaseModel;
+use Tipoff\Support\Traits\HasCreator;
 use Tipoff\Support\Traits\HasPackageFactory;
+use Tipoff\Support\Traits\HasUpdater;
 
 class Contact extends BaseModel
 {
+    use HasCreator;
     use HasPackageFactory;
-    use SoftDeletes;
     use HasStatuses;
+    use HasUpdater;
+    use SoftDeletes;
 
     protected $casts = [
         'emailed_at' => 'datetime',

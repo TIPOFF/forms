@@ -31,7 +31,10 @@
         "psr-4": {
             "Tipoff\\Forms\\": "src",
             "Tipoff\\Forms\\Database\\Factories\\": "database/factories"
-        }
+        },
+        "files": [
+            "src/Helpers/FormHelper.php"
+        ]
     },
     "autoload-dev": {
         "psr-4": {

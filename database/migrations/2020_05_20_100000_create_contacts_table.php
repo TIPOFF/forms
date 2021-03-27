@@ -24,6 +24,8 @@ class CreateContactsTable extends Migration
             $table->text('message')->nullable();
             $table->json('fields')->nullable();
 
+            $table->foreignIdFor(app('user'), 'creator_id')->nullable(); // Used if contact submitted by staff through admin panel
+            $table->foreignIdFor(app('user'), 'updater_id')->nullable(); // Used if contact updated by staff through admin panel
             $table->softDeletes(); // Soft delete if email bounces or if the contact submission is spam.
             $table->timestamps();
         });

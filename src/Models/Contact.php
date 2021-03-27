@@ -26,8 +26,6 @@ class Contact extends BaseModel
     use SoftDeletes;
 
     protected $casts = [
-        'emailed_at' => 'datetime',
-        'requested_date' => 'date',
         'fields' => 'array',
     ];
 
@@ -37,7 +35,9 @@ class Contact extends BaseModel
 
         static::creating(function ($contact) {
             Assert::lazy()
+                ->that($contact->form_type)->notEmpty('A contact must have a form type.')
                 ->that($contact->location_id)->notEmpty('A contact must be made to a location.')
+                ->that($contact->email_address_id)->notEmpty('A contact must supply an email address.')
                 ->verifyNow();
             $contact->generateReferenceNumber();
         });
@@ -80,6 +80,11 @@ class Contact extends BaseModel
     {
         return $this->getStatusHistory(ContactStatus::statusType());
     }
+    
+    public function location()
+    {
+        return $this->belongsTo(app('location'));
+    }
 
     public function email()
     {
@@ -91,19 +96,14 @@ class Contact extends BaseModel
         return $this->hasOne(app('phone'));
     }
 
-    public function response()
+    public function responses()
     {
-        return $this->hasOne(ContactResponse::class);
+        return $this->hasMany(ContactResponse::class);
     }
 
     public function user()
     {
         return $this->belongsTo(app('user'));
-    }
-
-    public function location()
-    {
-        return $this->belongsTo(app('location'));
     }
 
     public function notes()

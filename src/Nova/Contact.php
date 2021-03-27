@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Tipoff\Forms\Nova;
 
-use Dniccum\PhoneNumber\PhoneNumber;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\Date;
@@ -69,7 +68,7 @@ class Contact extends BaseResource
             ])->required()->hideWhenUpdating(),
             nova('location') ? BelongsTo::make('Location', 'location', nova('location'))->required()->hideWhenUpdating() : null,
             nova('user') ? BelongsTo::make('User', 'user', nova('user'))->required()->hideWhenUpdating() : null,
-            PhoneNumber::make('Phone')->format('###-###-####')->disableValidation()->useMaskPlaceholder()->linkOnDetail()->hideWhenUpdating(),
+            // PhoneNumber::make('Phone')->format('###-###-####')->disableValidation()->useMaskPlaceholder()->linkOnDetail()->hideWhenUpdating(),
             nova('email_address') ? BelongsTo::make('Email Address', 'email_address', nova('email_address'))->sortable() : null,
             Textarea::make('Message')->rows(3)->alwaysShow()->nullable()->hideWhenUpdating(),
 

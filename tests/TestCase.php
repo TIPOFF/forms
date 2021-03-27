@@ -13,6 +13,7 @@ use Tipoff\Authorization\AuthorizationServiceProvider;
 use Tipoff\Forms\FormsServiceProvider;
 use Tipoff\Locations\LocationsServiceProvider;
 use Tipoff\Notes\NotesServiceProvider;
+use Tipoff\Seo\SeoServiceProvider;
 use Tipoff\Statuses\StatusesServiceProvider;
 use Tipoff\Support\SupportServiceProvider;
 use Tipoff\TestSupport\BaseTestCase;

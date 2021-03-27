@@ -20,7 +20,7 @@ class CreateContactsTable extends Migration
             $table->string('first_name')->nullable();
             $table->string('last_name')->nullable();
             $table->string('company_name')->nullable();
-            $table->string('phone')->nullable(); // Will need to format before saving
+            $table->foreignIdFor(app('phone'))->nullable();
             $table->text('message')->nullable();
             $table->json('fields')->nullable();
 

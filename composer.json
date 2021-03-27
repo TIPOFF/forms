@@ -16,8 +16,6 @@
     ],
     "require": {
         "php": "^7.4|^8.0",
-        "dniccum/phone-number": "^1.1",
-        "inspheric/nova-email-field": "^1.42",
         "tipoff/authorization": "^2.6.2",
         "tipoff/locations": "^2.7.1",
         "tipoff/notes": "^2.0.1",

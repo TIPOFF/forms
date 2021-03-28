@@ -88,12 +88,12 @@ class Contact extends BaseModel
 
     public function email()
     {
-        return $this->hasOne(app('email_address'));
+        return $this->belongsTo(app('email_address'));
     }
     
     public function phone()
     {
-        return $this->hasOne(app('phone'));
+        return $this->belongsTo(app('phone'));
     }
 
     public function responses()

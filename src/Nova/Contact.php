@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Tipoff\Forms\Nova;
 
-use Dniccum\PhoneNumber\PhoneNumber;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\Date;
@@ -43,13 +42,13 @@ class Contact extends BaseResource
     {
         return array_filter([
             ID::make(),
+            nova('location') ? BelongsTo::make('Location', 'location', nova('location'))->sortable() : null,
+            Text::make('Form Type')->sortable(),
+            Text::make('Number', 'reference_number')->sortable(),
             Enum::make('ContactStatus', function (\Tipoff\Forms\Models\Contact $contact) {
                 return $contact->getContactStatus();
             })->attach(ContactStatus::class)->sortable(),
-            Text::make('Form Type')->sortable(),
-            Text::make('Number', 'reference_number')->sortable(),
             nova('user') ? BelongsTo::make('User', 'user', nova('user'))->sortable() : null,
-            nova('location') ? BelongsTo::make('Location', 'location', nova('location'))->sortable() : null,
             DateTime::make('Submitted', 'created_at')->sortable(),
         ]);
     }
@@ -57,9 +56,8 @@ class Contact extends BaseResource
     public function fields(Request $request)
     {
         return array_filter([
-            Enum::make('ContactStatus', function (\Tipoff\Forms\Models\Contact $contact) {
-                return $contact->getContactStatus();
-            })->attach(ContactStatus::class),
+            Text::make('Number', 'reference_number')->exceptOnForms(),
+            nova('location') ? BelongsTo::make('Location', 'location', nova('location'))->required()->hideWhenUpdating() : null,
             Select::make('Form Type')->options([
                 FormType::CONTACT => 'Contact',
                 FormType::RESERVATIONS => 'Reservations',
@@ -67,11 +65,15 @@ class Contact extends BaseResource
                 FormType::GROUPS => 'Groups',
                 FormType::EMPLOYMENT => 'Employment',
             ])->required()->hideWhenUpdating(),
-            nova('location') ? BelongsTo::make('Location', 'location', nova('location'))->required()->hideWhenUpdating() : null,
-            nova('user') ? BelongsTo::make('User', 'user', nova('user'))->required()->hideWhenUpdating() : null,
-            PhoneNumber::make('Phone')->format('###-###-####')->disableValidation()->useMaskPlaceholder()->linkOnDetail()->hideWhenUpdating(),
-            nova('email_address') ? BelongsTo::make('Email Address', 'email_address', nova('email_address'))->sortable() : null,
-            Textarea::make('Message')->rows(3)->alwaysShow()->nullable()->hideWhenUpdating(),
+            Enum::make('ContactStatus', function (\Tipoff\Forms\Models\Contact $contact) {
+                return $contact->getContactStatus();
+            })->attach(ContactStatus::class),
+            Text::make('First Name', 'first_name')->hideWhenUpdating(),
+            Text::make('Last Name', 'last_name')->hideWhenUpdating(),
+            nova('user') ? BelongsTo::make('User', 'user', nova('user'))->nullable()->hideWhenUpdating() : null,
+            nova('email_address') ? BelongsTo::make('Email Address', 'email', nova('email_address'))->required()->hideWhenUpdating() : null,
+            nova('phone') ? BelongsTo::make('Phone', 'phone', nova('phone'))->nullable() : null,
+            Text::make('Company Name')->nullable()->hideWhenUpdating(),
 
             new Panel('Submission Details', $this->submissionFields()),
 
@@ -82,20 +84,19 @@ class Contact extends BaseResource
     protected function submissionFields()
     {
         return [
-            Text::make('Number', 'reference_number')->exceptOnForms(),
-            Number::make('Participants', 'fields->participants')->nullable()->hideWhenUpdating(),
-            Date::make('Requested Date', 'fields->requested_date')->nullable()->hideWhenUpdating(),
-            Text::make('Requested Time', 'fields->requested_time')->nullable()->hideWhenUpdating(),
-            Text::make('Company Name')->nullable()->hideWhenUpdating(),
+            Textarea::make('Message')->rows(3)->alwaysShow()->nullable()->hideWhenUpdating(),
+//             Number::make('Participants', 'fields->participants')->nullable()->hideWhenUpdating(),
+//             Date::make('Requested Date', 'fields->requested_date')->nullable()->hideWhenUpdating(),
+//             Text::make('Requested Time', 'fields->requested_time')->nullable()->hideWhenUpdating(),
         ];
     }
 
     protected function dataFields(): array
     {
-        return [
-            ID::make(),
-            DateTime::make('Created At')->exceptOnForms(),
-            DateTime::make('Updated At')->exceptOnForms(),
-        ];
+        return array_merge(
+            parent::dataFields(),
+            $this->creatorDataFields(),
+            $this->updaterDataFields(),
+        );
     }
 }

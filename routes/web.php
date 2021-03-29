@@ -2,8 +2,12 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::get(config('tipoff.forms.active'), toControllerSlug(config('tipoff.forms.active')));
+foreach(config('tipoff.forms.active') as $activeRoute) {
+    Route::get($activeRoute, toControllerSlug($activeRoute));
+}
 
 Route::prefix('confirmation')->group(function () {
-    Route::get(config('tipoff.forms.active'), toControllerSlug(config('tipoff.forms.active')) . '@confirmation');
+    foreach(config('tipoff.forms.active') as $activeRoute) {
+        Route::get($activeRoute, toControllerSlug($activeRoute) . '@confirmation');
+    }
 });

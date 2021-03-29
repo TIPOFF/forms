@@ -95,8 +95,7 @@ class FormController extends BaseApiController
             $contact->save();
         }
 
-        // Todo: Might be easier to check the config to see if the form is enabled, maybe throw an error if it's not.
-        $path = ($request->form_type === config('tipoff.forms.active'))
+        $path = (in_array($request->form_type, config('tipoff.forms.active')))
             ? $request->form_type
             : null;
 

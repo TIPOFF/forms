@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace Tipoff\Forms\Http\Controllers\Web;
 
-use Illuminate\Routing\Controller;
 use App\Models\Location;
 use App\Models\Market;
 use DrewRoberts\Media\Models\Image;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controller;
 
 class ContactController extends Controller
 {

@@ -16,7 +16,7 @@
                     <div class="tger-contact__inner">
                         <form
                             method="post"
-                            action-xhr="{{ $location->submit_form_url }}"
+                            action-xhr="{{ $location->slug }}"
                             target="_top">
                             <fieldset>
                                 @csrf

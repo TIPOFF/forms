@@ -18,7 +18,7 @@ class ContactController extends Controller
 
         // Redirect to the user's current market if they have one set and end up on page in company section
         if ($current && $request->segment(1) === 'company') {
-            return redirect()->to($current->contact_path);
+            return redirect()->to($current->slug);
         }
 
         $image = Image::find(40)->url;
@@ -44,12 +44,12 @@ class ContactController extends Controller
 
         // Send to correct market if somehow they get to a URL with a different market than where the location belongs
         if ($location && $market->id !== $location->market_id) {
-            return redirect()->to($location->contact_path);
+            return redirect()->to($location->slug);
         }
 
         // If there is only one location in the market, remove the trailing location name in the route/URL
         if ($market->locations_count === 1 && $location) {
-            return redirect()->to($market->contact_path);
+            return redirect()->to($market->slug);
         }
 
         setCurrentMarket($request, $market);
@@ -67,7 +67,7 @@ class ContactController extends Controller
                 'seodescription' => 'Contact Us at The Great Escape Room, a leader in the escape room industry with 12 locations. Visit our website to learn more.',
                 'ogtitle' => 'Contact Us at The Great Escape Room',
                 'ogdescription' => 'Contact Us at The Great Escape Room, a leader in the escape room industry with 12 locations. Visit our website to learn more.',
-                'canonical' => 'https://thegreatescaperoom.com'.$market->contact_path,
+                'canonical' => 'https://thegreatescaperoom.com'.$market->slug,
                 'image' => $image,
                 'ogimage' => $image === null ? url('img/ogimage.jpg') : $image,
             ]);
@@ -89,7 +89,7 @@ class ContactController extends Controller
             'seodescription' => $market->title.' has '.$market->rooms->count().' different escape rooms and offers private escape games for groups & parties. Contact us today for more information!',
             'ogtitle' => 'Contact Us at '.$market->title,
             'ogdescription' => $market->title.' has '.$market->rooms->count().' different escape rooms and offers private escape games for groups & parties. Contact us today for more information!',
-            'canonical' => 'https://thegreatescaperoom.com'.$location->contact_path,
+            'canonical' => 'https://thegreatescaperoom.com'.$location->slug,
             'image' => $image,
             'ogimage' => $image === null ? url('img/ogimage.jpg') : $image,
         ]);
@@ -107,7 +107,7 @@ class ContactController extends Controller
             'title' => 'Thank you for contacting us',
             'subtitle' => 'We will be in touch soon!',
             'cta' => null,
-            'canonical' => 'https://thegreatescaperoom.com'.$location->contact_path,
+            'canonical' => 'https://thegreatescaperoom.com'.$location->slug,
             'image' => $image,
             'ogimage' => $image === null ? url('img/ogimage.jpg') : $image,
         ]);

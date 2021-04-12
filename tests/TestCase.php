@@ -6,6 +6,7 @@ namespace Tipoff\Forms\Tests;
 
 use DrewRoberts\Blog\BlogServiceProvider;
 use DrewRoberts\Media\MediaServiceProvider;
+use Livewire\LivewireServiceProvider;
 use Laravel\Nova\NovaCoreServiceProvider;
 use Spatie\Permission\PermissionServiceProvider;
 use Tipoff\Addresses\AddressesServiceProvider;
@@ -29,6 +30,7 @@ class TestCase extends BaseTestCase
             SupportServiceProvider::class,
             PermissionServiceProvider::class,
             AuthorizationServiceProvider::class,
+            LivewireServiceProvider::class,
             StatusesServiceProvider::class,
             NotesServiceProvider::class,
             AddressesServiceProvider::class,

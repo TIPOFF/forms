@@ -6,8 +6,8 @@ namespace Tipoff\Forms\Tests;
 
 use DrewRoberts\Blog\BlogServiceProvider;
 use DrewRoberts\Media\MediaServiceProvider;
-use Livewire\LivewireServiceProvider;
 use Laravel\Nova\NovaCoreServiceProvider;
+use Livewire\LivewireServiceProvider;
 use Spatie\Permission\PermissionServiceProvider;
 use Tipoff\Addresses\AddressesServiceProvider;
 use Tipoff\Authorization\AuthorizationServiceProvider;

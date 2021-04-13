@@ -31,13 +31,13 @@ class TestCase extends BaseTestCase
             PermissionServiceProvider::class,
             AuthorizationServiceProvider::class,
             LivewireServiceProvider::class,
-            StatusesServiceProvider::class,
-            NotesServiceProvider::class,
             AddressesServiceProvider::class,
             MediaServiceProvider::class,
             SeoServiceProvider::class,
             BlogServiceProvider::class,
             LocationsServiceProvider::class,
+            StatusesServiceProvider::class,
+            NotesServiceProvider::class,
             FormsServiceProvider::class,
         ];
     }

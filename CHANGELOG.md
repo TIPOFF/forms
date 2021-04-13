@@ -25,3 +25,8 @@ All notable changes to `forms` will be documented in this file.
 - grant permissions to roles
 - add nova resources
 - add nova filters
+
+## 2.1.0 - 2021-04-13
+
+- update migrations
+- update relationships

@@ -40,7 +40,7 @@ class Contact extends BaseResource
 
     public function title()
     {
-        if ($this->user != null){
+        if ($this->user != null) {
             return "{$this->user->first_name} {$this->user->last_name}";
         } else {
             return "{$this->first_name} {$this->last_name}";

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Tipoff\Forms\Nova;
 
 use Illuminate\Http\Request;
+use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Textarea;
@@ -33,6 +34,7 @@ class ContactResponse extends BaseResource
     {
         return array_filter([
             new Panel('Data Fields', $this->dataFields()),
+            nova('contact') ? BelongsTo::make('Contact', 'contact', nova('contact')) : null,
             Textarea::make('Message')->rows(3)->alwaysShow()->nullable()->hideWhenUpdating(),
             Textarea::make('Comment')->rows(3)->alwaysShow()->nullable()->hideWhenUpdating(),
         ]);

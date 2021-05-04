@@ -6,10 +6,12 @@ namespace Tipoff\Forms\Models;
 
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Tipoff\Support\Models\BaseModel;
+use Tipoff\Support\Traits\HasCreator;
 use Tipoff\Support\Traits\HasPackageFactory;
 
 class ContactResponse extends BaseModel
 {
+    use HasCreator;
     use HasPackageFactory;
     use SoftDeletes;
 

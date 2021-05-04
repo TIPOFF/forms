@@ -19,8 +19,8 @@ class CreateContactResponsesTable extends Migration
             $table->dateTime('emailed_at')->nullable();
 
             $table->foreignIdFor(app('user'), 'creator_id');
-            $table->softDeletes();
             $table->timestamp('created_at');
+            $table->softDeletes();
         });
     }
 }

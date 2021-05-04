@@ -36,8 +36,8 @@ class Contact extends BaseModel
         static::creating(function ($contact) {
             Assert::lazy()
                 ->that($contact->form_type)->notEmpty('A contact must have a form type.')
-                ->that($contact->location_id)->notEmpty('A contact must be made to a location.')
-                ->that($contact->email_address_id)->notEmpty('A contact must supply an email address.')
+                ->that($contact->location)->notEmpty('A contact must be made to a location.')
+                ->that($contact->email_address)->notEmpty('A contact must supply an email address.')
                 ->verifyNow();
             $contact->generateReferenceNumber();
         });
@@ -80,17 +80,17 @@ class Contact extends BaseModel
     {
         return $this->getStatusHistory(ContactStatus::statusType());
     }
-    
+
     public function location()
     {
         return $this->belongsTo(app('location'));
     }
 
-    public function email()
+    public function email_address()
     {
         return $this->belongsTo(app('email_address'));
     }
-    
+
     public function phone()
     {
         return $this->belongsTo(app('phone'));

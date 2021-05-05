@@ -73,7 +73,7 @@ class Contact extends BaseResource
                 FormType::PARTIES => 'Parties',
                 FormType::GROUPS => 'Groups',
                 FormType::EMPLOYMENT => 'Employment',
-            ])->required()->hideWhenUpdating(),
+            ])->rules('required')->hideWhenUpdating(),
             Enum::make('ContactStatus', function (\Tipoff\Forms\Models\Contact $contact) {
                 return $contact->getContactStatus();
             })->attach(ContactStatus::class),

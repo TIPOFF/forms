@@ -27,6 +27,7 @@ class ContactResponse extends BaseResource
     {
         return array_filter([
             ID::make(),
+            nova('contact') ? BelongsTo::make('Contact', 'contact', nova('contact')) : null,
         ]);
     }
 

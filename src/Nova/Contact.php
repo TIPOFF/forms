@@ -24,7 +24,7 @@ class Contact extends BaseResource
 {
     public static $model = \Tipoff\Forms\Models\Contact::class;
 
-    public static $title = 'reference_number';
+    public static $title = 'title';
 
     public static $search = [
         'id',
@@ -37,6 +37,15 @@ class Contact extends BaseResource
     protected array $filterClassList = [
         \Tipoff\Locations\Nova\Filters\Location::class,
     ];
+
+    public function title()
+    {
+        if ($this->user != null) {
+            return "{$this->user->first_name} {$this->user->last_name}";
+        } else {
+            return "{$this->first_name} {$this->last_name}";
+        }
+    }
 
     public function fieldsForIndex(NovaRequest $request)
     {
@@ -64,14 +73,14 @@ class Contact extends BaseResource
                 FormType::PARTIES => 'Parties',
                 FormType::GROUPS => 'Groups',
                 FormType::EMPLOYMENT => 'Employment',
-            ])->required()->hideWhenUpdating(),
+            ])->rules('required')->hideWhenUpdating(),
             Enum::make('ContactStatus', function (\Tipoff\Forms\Models\Contact $contact) {
                 return $contact->getContactStatus();
             })->attach(ContactStatus::class),
             Text::make('First Name', 'first_name')->hideWhenUpdating(),
             Text::make('Last Name', 'last_name')->hideWhenUpdating(),
             nova('user') ? BelongsTo::make('User', 'user', nova('user'))->nullable()->hideWhenUpdating() : null,
-            nova('email_address') ? BelongsTo::make('Email Address', 'email', nova('email_address'))->required()->hideWhenUpdating() : null,
+            nova('email_address') ? BelongsTo::make('Email Address', 'email_address', nova('email_address'))->required()->hideWhenUpdating() : null,
             nova('phone') ? BelongsTo::make('Phone', 'phone', nova('phone'))->nullable() : null,
             Text::make('Company Name')->nullable()->hideWhenUpdating(),
 
